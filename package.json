@@ -20,5 +20,9 @@
   "prisma": {
     "seed": "yarn rw exec seed"
   },
-  "packageManager": "yarn@4.0.2"
+  "packageManager": "yarn@4.0.2",
+  "dependencies": {
+    "@ant-design/icons": "^5.3.0",
+    "antd": "^5.14.1"
+  }
 }
