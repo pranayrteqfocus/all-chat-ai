@@ -19,7 +19,6 @@ const LoginPage = () => {
       <div
         style={{
           display: 'flex',
-          backgroundColor: 'green',
           alignContent: 'center',
           justifyContent: 'center',
           height: '100%',
@@ -37,7 +36,7 @@ const LoginPage = () => {
           }}
         />
       </div>
-      <h1>Username: {userData?.email}</h1>
+      <h1>Username: {userData?.name}</h1>
     </>
   )
 }
