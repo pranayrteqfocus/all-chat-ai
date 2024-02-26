@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import {
   CheckOutlined,
@@ -156,7 +156,15 @@ const HomePage = () => {
           padding: 10,
         }}
       >
-        <Flex style={{ flexDirection: 'column', width: '100%', gap: 0 }}>
+
+        <Flex
+          style={{
+            flexDirection: 'column',
+            width: '100%',
+            height: '100%',
+            gap: 0,
+          }}
+        >
           <Space style={{ gap: 5, marginLeft: 5 }}>
             <List
               grid={{ gutter: 16 }}
@@ -175,13 +183,28 @@ const HomePage = () => {
             />
           </Space>
           <Space.Compact>
-            <Input size="large" placeholder="Type your message here..." />
-            <Button
-              size="large"
-              type="primary"
-              icon={<SendOutlined />}
-              shape="circle"
-            />
+            <Flex style={{ display: 'flex', flexGrow: 2 }}>
+              <Input.TextArea
+                autoSize={{ minRows: 1, maxRows: 4 }}
+                size="large"
+                placeholder="Type your message here..."
+              />
+              <Space size={'small'} style={{ marginLeft: 5, alignSelf: 'end' }}>
+                <Button
+                  size="large"
+                  type="primary"
+                  icon={<SendOutlined />}
+                  shape="circle"
+                />
+                <Button
+                  size="large"
+                  onClick={() => setModalOpen(true)}
+                  type="primary"
+                  icon={<OpenAIOutlined />}
+                  shape="circle"
+                />
+              </Space>
+            </Flex>
           </Space.Compact>
         </Flex>
       </Space.Compact>
@@ -213,14 +236,6 @@ const HomePage = () => {
           </Checkbox.Group>
         </div>
       </Modal>
-      <Button
-        size="large"
-        onClick={() => setModalOpen(true)}
-        type="primary"
-        style={{ marginLeft: '90%', marginTop: 40 }}
-        icon={<OpenAIOutlined />}
-        shape="circle"
-      />
     </>
   )
 }

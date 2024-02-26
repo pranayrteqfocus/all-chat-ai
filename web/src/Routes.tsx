@@ -14,7 +14,7 @@ import ChatLayout from './layouts/ChatLayout/ChatLayout'
 const Routes = () => {
   return (
     <Router>
-      <Route path="/login" page={LoginPage} name="login" />
+      <Route path="/" page={LoginPage} name="login" />
       <Set wrap={ChatLayout}>
         <Route path="/home" page={HomePage} name="home" />
       </Set>
