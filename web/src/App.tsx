@@ -1,3 +1,5 @@
+import { GoogleOAuthProvider } from '@react-oauth/google'
+
 import { FatalErrorBoundary, RedwoodProvider } from '@redwoodjs/web'
 import { RedwoodApolloProvider } from '@redwoodjs/web/apollo'
 
@@ -10,7 +12,9 @@ const App = () => (
   <FatalErrorBoundary page={FatalErrorPage}>
     <RedwoodProvider titleTemplate="%PageTitle | %AppTitle">
       <RedwoodApolloProvider>
-        <Routes />
+        <GoogleOAuthProvider clientId="276067268996-qoff1a1bimvbtrcr4bnul4rnbqtt9qhr.apps.googleusercontent.com">
+          <Routes />
+        </GoogleOAuthProvider>
       </RedwoodApolloProvider>
     </RedwoodProvider>
   </FatalErrorBoundary>
