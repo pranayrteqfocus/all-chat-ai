@@ -1,13 +1,13 @@
+
 /* eslint-disable no-constant-condition */
 import { CSSProperties, useState } from 'react'
-
 import { GoogleOutlined } from '@ant-design/icons'
 import { GoogleLogin } from '@react-oauth/google'
 import { Button, Card, Space } from 'antd'
 import { jwtDecode } from 'jwt-decode'; // Import jwt-decode library
-
 import { Link, routes } from '@redwoodjs/router'
 import { Metadata } from '@redwoodjs/web'
+
 
 const divStyles: CSSProperties = {
   display: 'flex',
@@ -20,15 +20,12 @@ const divStyles: CSSProperties = {
   width: '100%',
   backgroundImage: `url("https://images.unsplash.com/photo-1548890126-91461beb4bf1?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`,
 }
-
 const LoginPage = () => {
   const [userData, setUserData] = useState({})
-
   const fetchData = (credential: any) => {
     const decodedToken = jwtDecode(credential)
     setUserData(decodedToken)
   }
-
   return (
     <div style={divStyles}>
       <Metadata title="Login" description="Login page" />
@@ -51,8 +48,8 @@ const LoginPage = () => {
         </Space>
       </Card>
     </div>
+
   )
 }
 
 export default LoginPage
-// <Link to={routes.home()}>Click here to start</Link>

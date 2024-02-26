@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 import {
+  CheckOutlined,
   OpenAIOutlined,
   SendOutlined,
   SlackOutlined,
@@ -149,12 +150,13 @@ const HomePage = () => {
       <Space.Compact
         block
         style={{
-          width: '80%',
+          width: '75%',
           position: 'absolute',
           bottom: 20,
           padding: 10,
         }}
       >
+
         <Flex
           style={{
             flexDirection: 'column',
@@ -206,7 +208,6 @@ const HomePage = () => {
           </Space.Compact>
         </Flex>
       </Space.Compact>
-
       <Modal
         title="Pick you AI"
         style={{ left: '25%' }}
