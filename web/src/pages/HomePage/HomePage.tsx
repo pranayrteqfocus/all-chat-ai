@@ -1,6 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { OpenAIOutlined, SendOutlined, UserOutlined } from '@ant-design/icons'
+import {
+  CheckOutlined,
+  OpenAIOutlined,
+  SendOutlined,
+  SlackOutlined,
+  UserOutlined,
+} from '@ant-design/icons'
 import {
   Avatar,
   Button,
@@ -14,28 +20,41 @@ import {
   Space,
   Typography,
 } from 'antd'
-import axios from 'axios'
 
 import { Metadata } from '@redwoodjs/web'
 
 const { Text } = Typography
 
-interface chatData {
-  query: string
-  answer: [
-    {
-      title: string
-      response: string
-    }
-  ]
-}
-
 const HomePage = () => {
   const [modalOpen, setModalOpen] = useState(false)
 
-  const [chatText, setChatText] = useState('')
-  const [data, setData] = useState<chatData[]>()
-  const [answers, setAnswers] = useState([])
+  const [data, setData] = useState([
+    {
+      query: 'first chat',
+      answer: [
+        {
+          title: 'AWS',
+          response:
+            'In Amazon Titan Foundation Models, TopP (Top-P) is a metric used to evaluate the performance of a text model. It is commonly used for evaluating language models on open-domain QA tasks. TopP measures the percentage of correct answers that a model predicts among the top k answers.\n\nFor more information on Amazon Titan and TopP, please see the relevant documentation and FAQs.',
+        },
+        { title: 'Title 1', response: 'asdasdgfds' },
+        { title: 'Title 1', response: 'asdasdgfds' },
+        { title: 'Title 1', response: 'asdasdgfds' },
+      ],
+    },
+    {
+      query: 'second chat',
+      answer: [{ title: 'Title 1', response: 'asdasdgfds' }],
+    },
+    {
+      query: 'third chat',
+      answer: [
+        { title: 'Title 1', response: 'asdasdgfds' },
+        { title: 'Title 1', response: 'asdasdgfds' },
+        { title: 'Title 1', response: 'asdasdgfds' },
+      ],
+    },
+  ])
 
   const [AIselection, setAISelection] = useState([
     {
@@ -46,7 +65,7 @@ const HomePage = () => {
     {
       title: 'Azure',
       url: 'https://static-00.iconduck.com/assets.00/microsoft-azure-icon-2048x1258-uc8ywy89.png',
-      status: false,
+      status: true,
     },
     {
       title: 'Google',
@@ -56,7 +75,7 @@ const HomePage = () => {
     {
       title: 'Chat Gpt',
       url: 'https://static.vecteezy.com/system/resources/previews/022/227/364/original/openai-chatgpt-logo-icon-free-png.png',
-      status: false,
+      status: true,
     },
   ])
 
@@ -71,34 +90,7 @@ const HomePage = () => {
     }))
     setAISelection(updatedSelection)
   }
-
-  const responseHandler = async () => {
-    try {
-      const response = await axios.post(
-        'https://b6u2607yj4.execute-api.us-east-1.amazonaws.com/dev/multi',
-        {
-          prompt: chatText,
-          model: 'titan_text',
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json', // Example header
-          },
-        }
-      )
-      setData((prevData) => [
-        ...prevData,
-        {
-          query: chatText,
-          answer: [{ title: 'Amazon Titan', response: response.data.body }],
-        },
-      ])
-      setChatText('')
-    } catch (error) {
-      console.error('Error:', error)
-    }
-  }
-
+  // Automatically scroll to the bottom of the list when it updates
   useEffect(() => {
     if (listRef.current) {
       listRef.current.scrollTop = listRef.current.scrollHeight
@@ -137,16 +129,7 @@ const HomePage = () => {
                         <Card
                           title={
                             <Space>
-                              <Avatar
-                                src={
-                                  <img
-                                    src={
-                                      'https://i.pinimg.com/originals/74/f4/f2/74f4f2bfb89ba284ebba6fcbad474a7d.jpg'
-                                    }
-                                    alt="avatar"
-                                  />
-                                }
-                              />
+                              <Avatar icon={<SlackOutlined />} />
                               <Text>{innerItem?.title}</Text>
                             </Space>
                           }
@@ -203,8 +186,6 @@ const HomePage = () => {
             <Flex style={{ display: 'flex', flexGrow: 2 }}>
               <Input.TextArea
                 autoSize={{ minRows: 1, maxRows: 4 }}
-                value={chatText}
-                onChange={(event) => setChatText(event.target.value)}
                 size="large"
                 placeholder="Type your message here..."
               />
@@ -214,9 +195,6 @@ const HomePage = () => {
                   type="primary"
                   icon={<SendOutlined />}
                   shape="circle"
-                  onClick={() => {
-                  responseHandler()
-                  }}
                 />
                 <Button
                   size="large"

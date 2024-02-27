@@ -2,15 +2,12 @@ import { useState } from 'react'
 
 import {
   HistoryOutlined,
-  LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   SettingOutlined,
   WechatOutlined,
 } from '@ant-design/icons'
 import { Button, ConfigProvider, Image, Layout, Menu } from 'antd'
-
-import { Link, routes } from '@redwoodjs/router'
 
 import theme from 'src/theme/themeConfig'
 
@@ -20,7 +17,7 @@ type ChatLayoutProps = {
   children?: React.ReactNode
 }
 
-const { Header, Sider, Content } = Layout
+const { Header, Sider, Content, Footer } = Layout
 
 const ChatLayout = ({ children }: ChatLayoutProps) => {
   const [collapsed, setCollapsed] = useState(false)
@@ -67,12 +64,7 @@ const ChatLayout = ({ children }: ChatLayoutProps) => {
           />
         </Sider>
         <Layout>
-          <Header
-            style={{
-              padding: 0,
-              backgroundColor: '#fff',
-            }}
-          >
+          <Header style={{ padding: 0, backgroundColor: '#fff' }}>
             <Button
               type="text"
               icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -83,9 +75,6 @@ const ChatLayout = ({ children }: ChatLayoutProps) => {
                 height: 64,
               }}
             />
-            <Link to={routes.login()} style={{ marginLeft: 1200 }}>
-              <LogoutOutlined />
-            </Link>
           </Header>
           <Content
             style={{
