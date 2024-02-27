@@ -4,8 +4,8 @@ import { CSSProperties, useState } from 'react'
 import { GoogleOutlined } from '@ant-design/icons'
 import { GoogleLogin } from '@react-oauth/google'
 import { Button, Card, Space } from 'antd'
-import { jwtDecode } from 'jwt-decode'; // Import jwt-decode library
-import { Link, routes } from '@redwoodjs/router'
+import { jwtDecode } from 'jwt-decode' // Import jwt-decode library
+import { Link,navigate, routes } from '@redwoodjs/router'
 import { Metadata } from '@redwoodjs/web'
 
 
@@ -36,7 +36,7 @@ const LoginPage = () => {
               onSuccess={(credentialResponse) => {
                 console.log(credentialResponse)
                 fetchData(credentialResponse.credential)
-                return <Link to={routes.home()} />
+                navigate(routes.home(), { state: { name: 'Nidhin' } })
               }}
               onError={() => {
                 console.log('Login Failed')
@@ -48,7 +48,6 @@ const LoginPage = () => {
         </Space>
       </Card>
     </div>
-
   )
 }
 
