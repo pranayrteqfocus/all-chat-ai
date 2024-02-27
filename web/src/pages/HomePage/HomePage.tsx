@@ -35,6 +35,7 @@ const HomePage = () => {
 
   const [chatText, setChatText] = useState('')
   const [data, setData] = useState<chatData[]>()
+  const [answers, setAnswers] = useState([])
 
   const [AIselection, setAISelection] = useState([
     {
@@ -85,15 +86,11 @@ const HomePage = () => {
           },
         }
       )
-      setData([
+      setData((prevData) => [
+        ...prevData,
         {
           query: chatText,
-          answer: [
-            {
-              title: 'Amazon Titan',
-              response: response.data.body,
-            },
-          ],
+          answer: [{ title: 'Amazon Titan', response: response.data.body }],
         },
       ])
       setChatText('')
